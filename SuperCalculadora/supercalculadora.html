@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Super Calculadora">
+    <meta name="keywords" content="HTML, CSS, JS">
+    <meta name="author" content="Jessie Aníbal">
+    <title>Super Calculadora</title>
+    <style>
+        html, body {
+            margin: 50;
+            padding: 50;
+            background-color: #523b7c;
+            font-family: Arial, Helvetica, sans-serif;
+            max-width: 150%;
+        }
+
+        h1 {
+            color: #0f0f0f;
+            text-align: center;
+        }
+
+        button {
+            background-color: #fcf7f7;
+            border-radius: 15%;
+            padding: 6px 10px;
+            cursor: pointer;
+        }
+
+        input {
+            margin: 0 10px;
+            height: 25px;
+        }
+
+        h4 {
+            color: #0a0a0a;
+            margin: 0;
+            text-indent: 2px;
+        }
+
+        .entradas {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            flex-wrap: wrap;
+        }
+
+        .entradas label {
+            margin: 0 5px;
+        }
+
+        .results {
+            background-color: #7c167c79;
+            border: 2px solid #080808;
+            padding: 10px;
+        }
+
+        .results-table {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .results-line {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .results-box {
+            border: 1px solid #0a0a0a;
+            width: 200px;
+            height: 80px;
+            padding: 10px;
+        }
+
+        .result-value {
+            color: #fff;
+            font-size: 20px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Super Calculadora</h1>
+        <div class="entradas">
+            <label for="A">Primeiro número (A):</label>
+            <input id="A" type="number" />
+            <label for="B">Segundo número (B):</label>
+            <input id="B" type="number" />
+            <button onclick="main()">Calcular</button>
+        </div>
+    </header>
+
+    <section class="results">
+        <div class="results-table">
+            <div class="results-line">
+                <div class="results-box"><h4>Soma</h4><p class="result-value" id="soma">-</p></div>
+                <div class="results-box"><h4>Multiplicação</h4><p class="result-value" id="mult">-</p></div>
+                <div class="results-box"><h4>Potência A^B</h4><p class="result-value" id="potAB">-</p></div>
+                <div class="results-box"><h4>Raiz de B</h4><p class="result-value" id="raizB">-</p></div>
+                <div class="results-box"><h4>% de A em B</h4><p class="result-value" id="porcAB">-</p></div>
+            </div>
+            <div class="results-line">
+                <div class="results-box"><h4>Subtração A-B</h4><p class="result-value" id="subAB">-</p></div>
+                <div class="results-box"><h4>Divisão A/B</h4><p class="result-value" id="divAB">-</p></div>
+                <div class="results-box"><h4>Potência B^A</h4><p class="result-value" id="potBA">-</p></div>
+                <div class="results-box"><h4>Fatorial de A</h4><p class="result-value" id="fatA">-</p></div>
+                <div class="results-box"><h4>% de B em A</h4><p class="result-value" id="porcBA">-</p></div>
+            </div>
+            <div class="results-line">
+                <div class="results-box"><h4>Subtração B-A</h4><p class="result-value" id="subBA">-</p></div>
+                <div class="results-box"><h4>Divisão B/A</h4><p class="result-value" id="divBA">-</p></div>
+                <div class="results-box"><h4>Raiz de A</h4><p class="result-value" id="raizA">-</p></div>
+                <div class="results-box"><h4>Fatorial de B</h4><p class="result-value" id="fatB">-</p></div>
+                <div class="results-box"><h4>Média</h4><p class="result-value" id="med">-</p></div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function main() {
+            const a = parseFloat(document.getElementById("A").value);
+            const b = parseFloat(document.getElementById("B").value);
+            if (isNaN(a) || isNaN(b)) {
+                alert("Digite valores válidos.");
+                return;
+            }
+
+            calcularSoma(a, b);
+            calcularSubtracao(a, b);
+            calcularMultiplicacao(a, b);
+            calcularDivisao(a, b);
+            calcularPotencias(a, b);
+            calcularRaizes(a, b);
+            calcularFatoriais(a, b);
+            calcularPorcentagens(a, b);
+            calcularMedia(a, b);
+        }
+
+        function calcularSoma(a, b) {
+            document.getElementById("soma").textContent = a + b;
+        }
+
+        function calcularSubtracao(a, b) {
+            document.getElementById("subAB").textContent = a - b;
+            document.getElementById("subBA").textContent = b - a;
+        }
+
+        function calcularMultiplicacao(a, b) {
+            document.getElementById("mult").textContent = a * b;
+        }
+
+        function calcularDivisao(a, b) {
+            document.getElementById("divAB").textContent = b !== 0 ? (a / b).toFixed(2) : "Erro";
+            document.getElementById("divBA").textContent = a !== 0 ? (b / a).toFixed(2) : "Erro";
+        }
+
+        function calcularPotencias(a, b) {
+            document.getElementById("potAB").textContent = Math.pow(a, b);
+            document.getElementById("potBA").textContent = Math.pow(b, a);
+        }
+
+        function calcularRaizes(a, b) {
+            document.getElementById("raizA").textContent = a >= 0 ? Math.sqrt(a).toFixed(2) : "Erro";
+            document.getElementById("raizB").textContent = b >= 0 ? Math.sqrt(b).toFixed(2) : "Erro";
+        }
+
+        function calcularFatoriais(a, b) {
+            document.getElementById("fatA").textContent = (a >= 0 && Number.isInteger(a)) ? fatorial(a) : "Erro";
+            document.getElementById("fatB").textContent = (b >= 0 && Number.isInteger(b)) ? fatorial(b) : "Erro";
+        }
+
+        function fatorial(n) {
+            if (n === 0 || n === 1) return 1;
+            let result = 1;
+            for (let i = 2; i <= n; i++) {
+                result *= i;
+            }
+            return result;
+        }
+
+        function calcularPorcentagens(a, b) {
+            document.getElementById("porcAB").textContent = b !== 0 ? ((a / b) * 100).toFixed(1) + "%" : "Erro";
+            document.getElementById("porcBA").textContent = a !== 0 ? ((b / a) * 100).toFixed(1) + "%" : "Erro";
+        }
+
+        function calcularMedia(a, b) {
+            document.getElementById("med").textContent = ((a + b) / 2).toFixed(2);
+        }
+    </script>
+</body>
+</html>
